@@ -1,0 +1,12 @@
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+
+  flex-direction: row;
+  /* line-height: 300px; */
+  /* text-align: center;  */
+  /* border: 2px dashed #f69c55; */
+}
