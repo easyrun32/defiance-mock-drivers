@@ -10,9 +10,10 @@ This version of parcel is deperacated but parcel is lightweight
 */
 const App = () => {
   return (
-    <div className="center">
-      <GenerateUser storeId={"psq1"} id={4545} role="manager" />
-      <GenerateAllUsers storeId={"psq1"} />
+    <div>
+      <div className="center">
+        <GenerateAllUsers storeId={"psq1"} manager={"felipe"} />
+      </div>
     </div>
   );
 };

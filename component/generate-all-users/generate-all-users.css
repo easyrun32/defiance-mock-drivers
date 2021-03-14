@@ -1,4 +1,13 @@
 .all-users {
+  width: 300px;
+}
+.user-buttons {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.storename {
+  font-size: 16px;
+  text-align: center;
 }

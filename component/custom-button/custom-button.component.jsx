@@ -3,9 +3,9 @@ import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   root: {
-    marginBottom: "20px",
     width: "200px",
-    marginRight: "30px",
+    marginTop: "10px",
+    marginBottom: "10px",
   },
 });
 const CustomButton = ({ children, ...props }) => {
