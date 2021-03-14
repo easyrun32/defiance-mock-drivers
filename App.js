@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import GenerateUser from "./component/generate-user/generate-user.component";
 import GenerateAllUsers from "./component/generate-all-users/generate-all-users.component";
+import MoveUser from "./component/move-user/move-user.component";
 /*
 This version of parcel is deperacated but parcel is lightweight
 
@@ -13,6 +13,9 @@ const App = () => {
     <div>
       <div className="center">
         <GenerateAllUsers storeId={"psq1"} manager={"felipe"} />
+       
+        <MoveUser id={4545} storeId={"psq1"} role={"driver"} />
+        <MoveUser id={ 8954} storeId={"psq1"} role={"driver"} />
       </div>
     </div>
   );
