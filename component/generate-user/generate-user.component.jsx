@@ -42,20 +42,23 @@ const GenerateUser = ({ id, storeId, role, name }) => {
     <CustomButton
       variant="outlined"
       color="inherit"
-      onClick={() => newuser(id)}
     >
       {showtext ? (
-        <div style={role === "manager" ? { color: "gold" } : { color: "red" }}>
+        <div onClick={() => newuser(id)} style={role === "manager" ? { color: "gold" } : { color: "red" }}>
           {name ? `Disconnect ${name}` : `Disconnect ${id}`}
         </div>
       ) : (
-        <div style={role === "manager" ? { color: "gold" } : {}}>
+        <div onClick={() => newuser(id)} style={role === "manager" ? { color: "gold" } : {}}>
           {" "}
           {name ? `Connect ${name}` : `Connect ${id}`}
         </div>
       )}
+      {showtext ? <div onClick={()=>sendMessage(sockets[id])}>message</div> : null}
     </CustomButton>
   );
+  function sendMessage(socket){
+    socket.send("fuck you")
+  }
 };
 
 export default GenerateUser;
