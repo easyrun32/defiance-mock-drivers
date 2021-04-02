@@ -1,12 +1,28 @@
 import React, { useState } from "react";
 import io from "socket.io-client";
 import CustomButton from "../custom-button/custom-button.component";
+import { makeStyles } from "@material-ui/core/styles";
+
+export const useStyles = makeStyles({
+  root: {
+    margin: "10px",
+    height: "30px",
+
+    color: (props) =>
+      props.role === "manager"
+        ? "cyan"
+        : props.is_connect_or_disconnect
+        ? "red"
+        : "white",
+  },
+  label: {},
+});
 
 const GenerateUser = ({ id, storeId, role, name }) => {
   const [sockets, setSockets] = useState({});
-  const [showtext, setText] = useState(false);
+  const [is_connect_or_disconnect, setConnectionStyling] = useState(false);
   const newuser = (number) => {
-    setText(!showtext);
+    setConnectionStyling(!is_connect_or_disconnect);
     if (Object.keys(sockets).length === 0) {
       const socket = io("http://localhost:3001");
       const conv = sockets;
@@ -38,23 +54,40 @@ const GenerateUser = ({ id, storeId, role, name }) => {
       }
     }
   };
+  const sendMessage = (socket) => {
+    socket.send("Hello world!");
+  };
+  const classes = useStyles({
+    role: role,
+    is_connect_or_disconnect: is_connect_or_disconnect,
+  });
+
   return (
-    <CustomButton
-      variant="outlined"
-      color="inherit"
-      onClick={() => newuser(id)}
-    >
-      {showtext ? (
-        <div style={role === "manager" ? { color: "gold" } : { color: "red" }}>
-          {name ? `Disconnect ${name}` : `Disconnect ${id}`}
-        </div>
-      ) : (
-        <div style={role === "manager" ? { color: "gold" } : {}}>
+    <div style={{ display: "flex" }}>
+      <CustomButton
+        variant="outlined"
+        color="inherit"
+        onClick={() => newuser(id)}
+        className={classes.root}
+      >
+        {is_connect_or_disconnect ? `Disconnect ${name} ` : ` Connect ${name}`}
+      </CustomButton>
+
+      {is_connect_or_disconnect ? (
+        <CustomButton
+          variant="outlined"
+          color="inherit"
+          className={classes.root}
+          style={{ color: "lightgreen" }}
+          onClick={() => sendMessage(sockets[id])}
+        >
           {" "}
-          {name ? `Connect ${name}` : `Connect ${id}`}
-        </div>
+          Message{" "}
+        </CustomButton>
+      ) : (
+        ""
       )}
-    </CustomButton>
+    </div>
   );
 };
 
