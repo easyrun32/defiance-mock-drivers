@@ -5,8 +5,12 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles({
   root: {
+    padding: "10px",
     margin: "10px",
-    height: "30px",
+    height: "40px",
+    fontSize: "13px",
+    width: "190px",
+    wordBreak: "break-all",
 
     color: (props) =>
       props.role === "manager"
@@ -57,6 +61,9 @@ const GenerateUser = ({ id, storeId, role, name }) => {
   const sendMessage = (socket) => {
     socket.send("Hello world!");
   };
+  const sendOrderComplete = (socket) => {
+    socket.emit("trigger");
+  };
   const classes = useStyles({
     role: role,
     is_connect_or_disconnect: is_connect_or_disconnect,
@@ -74,16 +81,29 @@ const GenerateUser = ({ id, storeId, role, name }) => {
       </CustomButton>
 
       {is_connect_or_disconnect ? (
-        <CustomButton
-          variant="outlined"
-          color="inherit"
-          className={classes.root}
-          style={{ color: "lightgreen" }}
-          onClick={() => sendMessage(sockets[id])}
-        >
-          {" "}
-          Message{" "}
-        </CustomButton>
+        <div style={{ display: "flex" }}>
+          <CustomButton
+            variant="outlined"
+            color="inherit"
+            className={classes.root}
+            style={{ color: "lightgreen" }}
+            onClick={() => sendMessage(sockets[id])}
+          >
+            {" "}
+            Message{" "}
+          </CustomButton>
+
+          <CustomButton
+            variant="outlined"
+            color="inherit"
+            className={classes.root}
+            style={{ color: "orange" }}
+            onClick={() => sendOrderComplete(sockets[id])}
+          >
+            {" "}
+            Complete{" "}
+          </CustomButton>
+        </div>
       ) : (
         ""
       )}

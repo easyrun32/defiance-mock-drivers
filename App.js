@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import GenerateAllUsers from "./component/generate-all-users/generate-all-users.component";
 import MoveUser from "./component/move-user/move-user.component";
+import OrderComplete from "./component/order-completion/order-completion.component";
 /*
 This version of parcel is deperacated but parcel is lightweight
 
@@ -12,10 +13,12 @@ const App = () => {
   return (
     <div>
       <div className="center">
-        <GenerateAllUsers storeId={"psq1"} manager={"felipe"} />
-       
-        <MoveUser id={4545} storeId={"psq1"} role={"driver"} />
-        <MoveUser id={ 8954} storeId={"psq1"} role={"driver"} />
+        <GenerateAllUsers storeId={"psq2"} manager={"felipe"} />
+
+        <MoveUser id={4545} storeId={"psq2"} role={"driver"} />
+        <MoveUser id={8954} storeId={"psq2"} role={"driver"} />
+        {/* <br />
+        <OrderComplete /> */}
       </div>
     </div>
   );
