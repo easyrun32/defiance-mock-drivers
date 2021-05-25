@@ -9,7 +9,8 @@ const GenerateAllUsers = ({ storeId, manager }) => {
       setUser(res.data);
     });
   }, []);
-  console.log(users);
+  // console.log(users);
+  // console.log("hello", process.env);
   return (
     <div className="all-users">
       <div className="storename">{storeId}</div>

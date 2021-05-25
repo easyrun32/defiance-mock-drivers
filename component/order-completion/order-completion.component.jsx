@@ -4,22 +4,24 @@ import Button from "@material-ui/core/Button";
 const OrderComplete = () => {
   const [socket, setSocket] = useState();
   useEffect(() => {
-    const socket = io("http://localhost:3001");
-      setSocket(socket);
-      socket.on('connect', () => {
-          socket.emit("new-user", {
-              store: 'psq2',
-              id: 4545,
-              role: 'driver',
-          });
+    const socket = io("http://localhost:3001/");
+    setSocket(socket);
+    socket.on("connect", () => {
+      socket.emit("new-user", {
+        store: "psq2",
+        id: 4545,
+        role: "driver",
       });
-      socket.on("disconnect", ()=>{
-        console.log("client disconnected from server");
-      });
-      return (() => { socket.close() });
+    });
+    socket.on("disconnect", () => {
+      console.log("client disconnected from server");
+    });
+    return () => {
+      socket.close();
+    };
   }, []);
   const completeOrder = () => {
-    socket.emit("trigger");
+    socket.emit("order-new");
   };
   return (
     <div>
