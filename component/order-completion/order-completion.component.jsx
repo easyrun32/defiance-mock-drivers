@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 const OrderComplete = () => {
   const [socket, setSocket] = useState();
   useEffect(() => {
-    const socket = io("http://localhost:3001/");
+    const socket = io("http://localhost:3001/ ");
     setSocket(socket);
     socket.on("connect", () => {
       socket.emit("new-user", {

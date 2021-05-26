@@ -22,21 +22,25 @@ export const useStyles = makeStyles({
   label: {},
 });
 
-const GenerateUser = ({ id, storeId, role, name }) => {
+const GenerateUser = ({ id, storeId, role, name, otherinfo }) => {
   const [sockets, setSockets] = useState({});
   const [is_connect_or_disconnect, setConnectionStyling] = useState(false);
   const newuser = (number) => {
     setConnectionStyling(!is_connect_or_disconnect);
     if (Object.keys(sockets).length === 0) {
-      const socket = io("http://localhost:3001/");
+      const socket = io("http://localhost:3001/ ");
       const conv = sockets;
       conv[number] = socket;
       setSockets(conv);
       socket.on("connect", () => {
         socket.emit("new-user", {
-          store: storeId,
-          id: number,
-          role: role,
+          ...{
+            store: storeId,
+            id: id,
+            role: role,
+            firstName: name,
+          },
+          ...otherinfo,
         });
       });
     } else {
@@ -44,15 +48,19 @@ const GenerateUser = ({ id, storeId, role, name }) => {
         sockets[number].disconnect();
         delete sockets[number];
       } else {
-        const socket = io("http://localhost:3001/");
+        const socket = io("http://localhost:3001/ ");
         const conv = sockets;
         conv[number] = socket;
         setSockets(conv);
         socket.on("connect", () => {
           socket.emit("new-user", {
-            store: storeId,
-            id: number,
-            role: role,
+            ...{
+              store: storeId,
+              id: id,
+              role: role,
+              firstName: name,
+            },
+            ...otherinfo,
           });
         });
       }

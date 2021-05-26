@@ -77,7 +77,7 @@ const MoveUser = ({ id, storeId, role }) => {
   const newuser = () => {
     //So it doesn't create a new socket
     if (connected) {
-      const socket = io("http://localhost:3001/");
+      const socket = io("http://localhost:3001/ ");
       setSocket(socket);
       setConnected(false);
     }
